@@ -1,3 +1,10 @@
+# The Module will cover scenarios such as:
+# 1. Create Multiple APPS and each app will have it's own addons configured or skipped based on the inputs provided
+# 2. Create Single APP and that app will be configured with new addon
+# 3. Create Single APP and attach shared add-on which already exist 
+# 4. Attach new add-on to already existing APP or attach shared addon to already existing APP
+# 5. Attach new configs to the already existing APP
+
 ######################################## HEROKU CREATE MULTIPLE APPS ####################################################################### 
 
 resource "heroku_app" "multiple_apps" {
@@ -9,7 +16,7 @@ resource "heroku_app" "multiple_apps" {
   buildpacks       = concat(each.value.buildpacks, ["heroku/python"])
   space            = var.enable_private_space ? each.value.space : null
   internal_routing = var.enable_private_space ? each.value.internal_routing : false # If it is is set as false, by default application will be pubic facing
-  acm              = each.value.acm                                                 #SSL Cert For custom Domain
+  acm              = each.value.acm  #SSL Cert For custom Domain
 
   dynamic "organization" {
     for_each = each.value.organization
