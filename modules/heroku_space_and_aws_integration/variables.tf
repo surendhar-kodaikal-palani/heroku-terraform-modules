@@ -43,22 +43,22 @@ variable "shield" {
 variable "add_team_members" {
   type        = bool
   description = "Add team members to the Prvate Space or not"
-  default = false
+  default     = false
 }
 
 variable "access" {
   type = list(object({
-    email   = string
-    permissions  = list(string)
+    email       = string
+    permissions = list(string)
   }))
   default = {
     "member1" = {
-      email = "surendhar@example.com"
+      email       = "surendhar@example.com"
       permissions = ["create_apps"] # Give an existing team member create_apps permissions to the Private Space
     },
     "member2" = {
-      email = "skodaikal@example.com" #Remove all permissions from an existing team member
-      permissions = [] 
+      email       = "skodaikal@example.com" #Remove all permissions from an existing team member
+      permissions = []
     }
   }
 }
@@ -68,7 +68,7 @@ variable "access" {
 variable "enable_inbound_ruleset" {
   type        = bool
   description = "Create a Private Space which has custom Inbound ruleset"
-  default = false
+  default     = false
 }
 
 variable "space_name_with_inbound_rules" {
@@ -79,23 +79,23 @@ variable "space_name_with_inbound_rules" {
 variable "enable_inbound_rules" {
   type        = bool
   description = "Should we expose Private Space to external world by using inbound ruleset"
-  default = false
+  default     = false
 }
 
 variable "rules" {
   description = "A map of inbound rules to create for the Heroku Space."
   type = map(object({
-    action        = string
-    source        = string
+    action = string
+    source = string
   }))
   default = {
     rule1 = {
-      action     = "allow"
-      source   = "10.0.0.0/16"
+      action = "allow"
+      source = "10.0.0.0/16"
     },
     rule2 = {
-      action     = "deny"
-      source   = "172.0.0.0/16"
+      action = "deny"
+      source = "172.0.0.0/16"
     }
   }
 }

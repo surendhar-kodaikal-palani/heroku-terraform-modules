@@ -1,70 +1,70 @@
 variable "single_app_name" {
   type        = string
   description = "Name of the single app"
-  default = ""
+  default     = ""
 }
 
 variable "single_app_region" {
   type        = string
   description = "Heroku region for the app"
-  default = "us"
+  default     = "us"
 }
 
 variable "single_app_stack" {
   type        = string
   description = "Heroku stack for the app"
-  default = "heroku-20"
+  default     = "heroku-20"
 }
 
 variable "single_app_buildpacks" {
   type        = list(string)
   description = "List of Heroku buildpacks for the app"
-  default = []
+  default     = []
 }
 
 variable "single_app_enable_private_space" {
   type        = bool
   description = "Enable a Heroku private space for the app"
-  default = false
+  default     = false
 }
 
 variable "single_app_space" {
   type        = string
   description = "Heroku private space for the app"
-  default = ""
+  default     = ""
 }
 
 variable "single_app_internal_routing" {
   type        = bool
   description = "Enable internal routing for the app in the Heroku private space"
-  default = false
+  default     = false
 }
 
 variable "single_app_acm" {
   type        = bool
   description = "Enable automatic certificate management (ACM) for the app"
-  default = false
+  default     = false
 }
 
 variable "single_app_organization" {
-  type        = map(object({
+  type = map(object({
     locked   = bool
     personal = bool
   }))
   description = "Map of Heroku app organizations for the app"
-  default = {}
+  default     = {}
 }
 
 variable "single_app_config_vars" {
   type        = map(string)
   description = "Map of Heroku app config vars for the app"
-  default = {}
+  default     = {}
 }
 
 variable "single_app_sensitive_config_vars" {
   type        = map(string)
   description = "Map of Heroku app sensitive config vars for the app"
-  default = {}
+  default     = {}
 }
 
 ############### BUILD ###############
@@ -86,7 +86,7 @@ variable "repo_url" {
 variable "version" {
   type        = string
   description = "The version of the build source."
-  default = "main"
+  default     = "main"
 }
 
 variable "buildpacks" {
