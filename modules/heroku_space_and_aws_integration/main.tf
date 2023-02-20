@@ -33,7 +33,7 @@ resource "heroku_space" "expose_private_with_inbound_rules" {
 }
 
 resource "heroku_space_inbound_ruleset" "this" {
-  count = var.enable_inbound_ruleset ? 1 : 0
+  count = var.enable_inbound_rules ? 1 : 0
 
   space = heroku_space.expose_private_with_inbound_rules
 
@@ -91,6 +91,9 @@ module "rds" {
 }
 
 # VPC Peering with AWS account for Multi Cloud functionality and use aws resources such as Elasticache, RDS, MSK with encrytion at rest
+# Below Data block is going to check from which resource block space was created and based on that space name will be passed.
+# If both flags are false and if we want to peer with already existing space, pass the value to the variable called <existing_space_name>
+  
 data "heroku_space_peering_info" "peer_space" {
   name = var.enable_inbound_rules ? heroku_space.expose_private_with_inbound_rules.name : var.create_private_space ? heroku_space.private.name : var.existing_space_name
 }
@@ -102,7 +105,7 @@ resource "aws_vpc_peering_connection" "request" {
 }
 
 resource "heroku_space_peering_connection_accepter" "accept" {
-  space                     = heroku_space.peer_space.id
+  space                     = heroku_space_peering_info.peer_space.id
   vpc_peering_connection_id = aws_vpc_peering_connection.request.id
 }
 
